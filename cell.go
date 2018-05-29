@@ -77,6 +77,11 @@ func (c *Cell) Type() CellType {
 	return c.cellType
 }
 
+// SetType sets type of a cell. See CellType constants for more details.
+func (c *Cell) SetType(t CellType) {
+	c.cellType = t
+}
+
 // SetString sets the value of a cell to a string.
 func (c *Cell) SetString(s string) {
 	c.Value = s
