@@ -5,6 +5,11 @@ import (
 	"strings"
 )
 
+type xlsxDrawing struct {
+	XMLName xml.Name `xml:"drawing,omitempty"`
+	RId     string   `xml:"http://schemas.openxmlformats.org/officeDocument/2006/relationships id,attr"`
+}
+
 // xlsxWorksheet directly maps the worksheet element in the namespace
 // http://schemas.openxmlformats.org/spreadsheetml/2006/main -
 // currently I have not checked it for completeness - it does as much
@@ -22,7 +27,9 @@ type xlsxWorksheet struct {
 	PrintOptions  xlsxPrintOptions  `xml:"printOptions"`
 	PageMargins   xlsxPageMargins   `xml:"pageMargins"`
 	PageSetUp     xlsxPageSetUp     `xml:"pageSetup"`
+	Drawing       *xlsxDrawing
 	HeaderFooter  xlsxHeaderFooter  `xml:"headerFooter"`
+	Rels          xlsxWorkbookRels
 }
 
 // xlsxHeaderFooter directly maps the headerFooter element in the namespace

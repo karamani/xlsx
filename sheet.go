@@ -20,6 +20,8 @@ type Sheet struct {
 	SheetViews  []SheetView
 	SheetFormat SheetFormat
 	AutoFilter  *AutoFilter
+	Drawing     string
+	Rels        []xlsxWorkbookRelation
 }
 
 type SheetView struct {
@@ -187,6 +189,13 @@ func (s *Sheet) makeXLSXSheet(refTable *RefTable, styles *xlsxStyleSheet) *xlsxW
 	xSheet := xlsxSheetData{}
 	maxRow := 0
 	maxCell := 0
+
+	if s.Drawing != "" {
+		worksheet.Drawing = &xlsxDrawing{
+			RId: s.Drawing,
+		}
+	}
+
 	var maxLevelCol, maxLevelRow uint8
 
 	// Scan through the sheet and see if there are any merged cells. If there

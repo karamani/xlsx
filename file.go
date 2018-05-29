@@ -279,6 +279,15 @@ func (f *File) MarshallParts() (map[string]string, error) {
 		if err != nil {
 			return parts, err
 		}
+
+		sheetRels := xlsxWorkbookRels{}
+		sheetRels.Relationships = sheet.Rels
+		partName = fmt.Sprintf("xl/worksheets/_rels/sheet%d.xml.rels", sheetIndex)
+		parts[partName], err = marshal(sheetRels)
+		if err != nil {
+			return parts, err
+		}
+
 		sheetIndex++
 	}
 
